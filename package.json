@@ -1,0 +1,29 @@
+{
+  "name": "lint-staged-config-public",
+  "version": "0.0.1",
+  "description": "Public repo for lint-staged checks and scripts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/svvsaga/lint-staged-config-public.git"
+  },
+  "author": "Statens Vegvesen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/svvsaga/lint-staged-config-public/issues"
+  },
+  "homepage": "https://github.com/svvsaga/lint-staged-config-public#readme",
+  "dependencies": {
+    "husky": "^7.0.4",
+    "lint-staged": "^12.0.3",
+    "replace-in-file": "^6.3.2",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.9"
+  }
+}
