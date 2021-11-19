@@ -1,2 +1,3 @@
-# lint-staged-config-public
+# node-modules-public
+
 Public repo for lint-staged checks and scripts
