@@ -8,7 +8,7 @@
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install",
-    "postinstall": "husky install && husky add .husky/pre-commit \"npx lint-staged\""
+    "postinstall": "cd ../.. && husky install && husky add .husky/pre-commit \"npx lint-staged\""
   },
   "bin": {
     "check-for-secrets": "./lib/scripts/check-for-secrets.js",
