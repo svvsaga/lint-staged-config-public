@@ -8,6 +8,9 @@ type LintStagedConfig = {
 export type LintStagedOptions = {
   ignoreSecretsInFilesRegex?: RegExp | RegExp[]
   ignoreLargeFilesRegex?: RegExp | RegExp[]
+  terraformFmt?: boolean
+  terragruntHclFmt?: boolean
+  ktlint?: boolean
   extras?: LintStagedConfig
 }
 
@@ -30,6 +33,9 @@ export const lintStagedConfig = ({
   ignoreLargeFilesRegex = undefined,
   ignoreSecretsInFilesRegex = undefined,
   extras = {},
+  ktlint,
+  terraformFmt,
+  terragruntHclFmt,
 }: LintStagedOptions = {}): LintStagedConfig => ({
   '**': (filenames) => [
     'check-for-secrets ' +
@@ -45,5 +51,20 @@ export const lintStagedConfig = ({
         .map((filename) => `"${filename}"`)
         .join(' '),
   ],
+  ...(ktlint
+    ? {
+        '**/*.kt?(s)': () => ['ktlint -F'],
+      }
+    : {}),
+  ...(terraformFmt
+    ? {
+        '**/*.tf?(vars)': () => ['terraform fmt -recursive .'],
+      }
+    : {}),
+  ...(terragruntHclFmt
+    ? {
+        '**/*.hcl': () => ['terragrunt hclfmt'],
+      }
+    : {}),
   ...extras,
 })

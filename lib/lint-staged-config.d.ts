@@ -4,7 +4,10 @@ declare type LintStagedConfig = {
 export declare type LintStagedOptions = {
     ignoreSecretsInFilesRegex?: RegExp | RegExp[];
     ignoreLargeFilesRegex?: RegExp | RegExp[];
+    terraformFmt?: boolean;
+    terragruntHclFmt?: boolean;
+    ktlint?: boolean;
     extras?: LintStagedConfig;
 };
-export declare const lintStagedConfig: ({ ignoreLargeFilesRegex, ignoreSecretsInFilesRegex, extras, }?: LintStagedOptions) => LintStagedConfig;
+export declare const lintStagedConfig: ({ ignoreLargeFilesRegex, ignoreSecretsInFilesRegex, extras, ktlint, terraformFmt, terragruntHclFmt, }?: LintStagedOptions) => LintStagedConfig;
 export {};
