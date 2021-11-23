@@ -2,9 +2,15 @@
   "name": "node-modules-public",
   "version": "0.0.1",
   "description": "Public repo for lint-staged checks and scripts",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "scripts": {
+    "clean": "del-cli lib",
+    "build": "npm run clean && tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "check-for-secrets": "./lib/scripts/check-for-secrets.js",
+    "block-large-files": "./lib/scripts/block-large-files.js"
   },
   "repository": {
     "type": "git",
@@ -17,13 +23,15 @@
   },
   "homepage": "https://github.com/svvsaga/node-modules-public#readme",
   "dependencies": {
+    "commander": "^8.3.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.0.3",
     "replace-in-file": "^6.3.2",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.5.2"
+    "ts-node": "^10.4.0"
   },
   "devDependencies": {
-    "@types/node": "^16.11.9"
+    "@types/node": "^16.11.9",
+    "del-cli": "^4.0.1",
+    "typescript": "^4.5.2"
   }
 }
