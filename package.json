@@ -7,8 +7,7 @@
     "clean": "del-cli lib",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install",
-    "postinstall": "cd ../.. && husky install && husky add .husky/pre-commit \"npx lint-staged\""
+    "prepare": "husky install"
   },
   "bin": {
     "check-for-secrets": "./lib/scripts/check-for-secrets.js",
