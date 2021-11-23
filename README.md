@@ -4,7 +4,34 @@ Public repo for lint-staged checks and scripts
 
 ## Usage
 
-TODO
+From the repo where you want to add husky and lint-staged:
+
+```bash
+npm i -D svvsaga/node-modules-public#v0.1.1
+./node_modules/node-modules-public/setup.sh
+echo "module.exports = require('node-modules-public').lintStagedConfig()" > lint-staged.config.cjs
+```
+
+### Parameters
+
+You can add more tasks with the `extras`-parameter:
+
+```javascript
+module.exports = require('node-modules-public').lintStagedConfig({
+  extras: {
+    '**/*.ts': () => ['npm run all', 'git add .'],
+  },
+})
+```
+
+You can ignore specific secret or large files with `ignoreSecretsInFilesRegex` and `ignoreLargeFilesRegex`. `package-lock.json` is automatically ignored.
+
+```javascript
+module.exports = require('node-modules-public').lintStagedConfig({
+  ignoreSecretsInFilesRegex = /my-secret\.json$/
+  ignoreLargeFilesRegex = /\.png$/
+})
+```
 
 ## Development
 
