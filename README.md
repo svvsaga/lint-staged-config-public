@@ -7,7 +7,7 @@ Public repo for lint-staged checks and scripts
 From the repo where you want to add husky and lint-staged:
 
 ```bash
-npm i -D svvsaga/node-modules-public#v0.1.1
+npm i -D svvsaga/node-modules-public#v0.2.0
 ./node_modules/node-modules-public/setup.sh
 echo "module.exports = require('node-modules-public').lintStagedConfig()" > lint-staged.config.cjs
 ```
