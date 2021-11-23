@@ -8,4 +8,4 @@ TODO
 
 ## Development
 
-Run `./setup-dev.sh` to link this package globally, so `check-for-secrets` etc. are available in the Node `bin/`-folder.
+Run `./setup-dev.sh` to install this package globally, so `check-for-secrets` etc. are available in the Node `bin/`-folder.

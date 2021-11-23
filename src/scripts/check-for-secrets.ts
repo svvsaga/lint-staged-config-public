@@ -10,7 +10,8 @@ for (const file of process.argv.slice(2)) {
     (contents.includes('-----BEGIN PRIVATE') ||
       contents.includes('-----BEGIN RSA PRIVATE') ||
       contents.includes('-----BEGIN CERTIFICATE')) &&
-    !file.endsWith('check-for-secrets.ts')
+    !file.endsWith('check-for-secrets.ts') &&
+    !file.endsWith('check-for-secrets.js')
   ) {
     console.error(
       `Private key detected in ${file}! To override, commit with "--no-verify".`

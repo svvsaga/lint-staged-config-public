@@ -1,12 +1,13 @@
 {
   "name": "node-modules-public",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Public repo for lint-staged checks and scripts",
   "main": "./lib/index.js",
   "scripts": {
     "clean": "del-cli lib",
-    "build": "npm run clean && tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "bin": {
     "check-for-secrets": "./lib/scripts/check-for-secrets.js",

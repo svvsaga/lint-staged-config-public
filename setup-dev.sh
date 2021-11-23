@@ -1,1 +1,1 @@
-npm link
+npm i -g .

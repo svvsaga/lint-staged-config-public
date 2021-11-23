@@ -1,12 +1,14 @@
 type LintStagedConfig = {
-  [glob: string]: (
-    filenames: string[]
-  ) => string | string[] | Promise<string | string[]>
+  [glob: string]:
+    | string
+    | string[]
+    | ((filenames: string[]) => string | string[] | Promise<string | string[]>)
 }
 
 export type LintStagedOptions = {
   ignoreSecretsInFilesRegex?: RegExp | RegExp[]
   ignoreLargeFilesRegex?: RegExp | RegExp[]
+  extras?: LintStagedConfig
 }
 
 function filterIgnoredFiles(
@@ -27,6 +29,7 @@ const defaultIgnoreLargeFiles = ['package-lock.json']
 export const lintStagedConfig = ({
   ignoreLargeFilesRegex = undefined,
   ignoreSecretsInFilesRegex = undefined,
+  extras = {},
 }: LintStagedOptions = {}): LintStagedConfig => ({
   '**': (filenames) => [
     'check-for-secrets ' +
@@ -42,4 +45,5 @@ export const lintStagedConfig = ({
         .map((filename) => `"${filename}"`)
         .join(' '),
   ],
+  ...extras,
 })
