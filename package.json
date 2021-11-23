@@ -8,7 +8,7 @@
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install",
-    "postinstall": "echo 'run `./node_modules/node-modules-public/setup.sh` to finish setting up husky!'"
+    "postinstall": "node postinstall.js"
   },
   "bin": {
     "check-for-secrets": "./lib/scripts/check-for-secrets.js",
