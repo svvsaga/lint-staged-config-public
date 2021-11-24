@@ -12,7 +12,8 @@
   },
   "bin": {
     "check-for-secrets": "./lib/scripts/check-for-secrets.js",
-    "block-large-files": "./lib/scripts/block-large-files.js"
+    "block-large-files": "./lib/scripts/block-large-files.js",
+    "set-tf-modules-version": "./lib/scripts/set-tf-modules-version.js"
   },
   "repository": {
     "type": "git",

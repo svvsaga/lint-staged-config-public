@@ -43,6 +43,10 @@ module.exports = require('node-modules-public').lintStagedConfig({
 })
 ```
 
+## Other utils
+
+- `set-tf-modules-version`: Used to set the version of our `terraform-modules` module, e.g. `set-tf-modules-version v1.1.1` will find and replace the version of all references to the `terraform-modules` repo in our `.tf`-files.
+
 ## Development
 
 Run `./setup-dev.sh` to install this package globally, so `check-for-secrets` etc. are available in the Node `bin/`-folder.
