@@ -33,9 +33,9 @@ export const lintStagedConfig = ({
   ignoreLargeFilesRegex = undefined,
   ignoreSecretsInFilesRegex = undefined,
   extras = {},
-  ktlint,
-  terraformFmt,
-  terragruntHclFmt,
+  ktlint = false,
+  terraformFmt = false,
+  terragruntHclFmt = false,
 }: LintStagedOptions = {}): LintStagedConfig => ({
   '**': (filenames) => [
     'check-for-secrets ' +

@@ -1,1 +1,1 @@
-export { lintStagedConfig } from './lint-staged-config'
+export { lintStagedConfig } from './lint-staged-config.js'

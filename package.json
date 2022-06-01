@@ -1,8 +1,9 @@
 {
   "name": "node-modules-public",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Public repo for lint-staged checks and scripts",
   "main": "./lib/index.js",
+  "type": "module",
   "scripts": {
     "clean": "del-cli lib",
     "build": "tsc",
@@ -13,7 +14,8 @@
   "bin": {
     "check-for-secrets": "./lib/scripts/check-for-secrets.js",
     "block-large-files": "./lib/scripts/block-large-files.js",
-    "set-tf-modules-version": "./lib/scripts/set-tf-modules-version.js"
+    "set-tf-modules-version": "./lib/scripts/set-tf-modules-version.js",
+    "generate-gcp-project-config": "./lib/scripts/generate-gcp-project-config.js"
   },
   "repository": {
     "type": "git",
@@ -26,16 +28,16 @@
   },
   "homepage": "https://github.com/svvsaga/node-modules-public#readme",
   "dependencies": {
-    "commander": "^8.3.0",
-    "husky": "^7.0.4",
-    "lint-staged": "^12.0.3",
-    "replace-in-file": "^6.3.2",
-    "ts-node": "^10.4.0"
+    "@google-cloud/resource-manager": "^3.2.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.0",
+    "replace-in-file": "^6.3.5",
+    "ts-node": "^10.8.0"
   },
   "devDependencies": {
-    "@types/node": "^16.11.9",
+    "@types/node": "^17.0.38",
     "del-cli": "^4.0.1",
-    "node-modules-public": "github:svvsaga/node-modules-public#v0.0.3",
-    "typescript": "^4.5.2"
+    "node-modules-public": ".",
+    "typescript": "^4.7.2"
   }
 }
