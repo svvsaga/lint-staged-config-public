@@ -71,7 +71,7 @@ writeFileSync('projects.config.json', sharedConfig)
 console.log('Shared project config saved!')
 
 const replaceTeamUppercaseResults = await replaceInFile({
-  files: './**/*.yml',
+  files: './.github/workflows/*.yml',
   from: /<INSERT_TEAM_UPPERCASE>/g,
   to: team.toUpperCase(),
 })
@@ -87,7 +87,7 @@ const replaceTeamLowercaseResults = await replaceInFile({
 console.log('Team replacement lowercase results:', replaceTeamLowercaseResults)
 
 const replaceProjectResults = await replaceInFile({
-  files: './**/*.json',
+  files: './**/tf-pr-action.config.json',
   from: /<INSERT_PROJECT>/g,
   to: project.toUpperCase(),
 })
