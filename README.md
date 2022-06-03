@@ -9,7 +9,7 @@ First, Make sure Node 16+ is installed.
 From the repo where you want to add husky and lint-staged:
 
 ```bash
-npm i -D svvsaga/node-modules-public#v1.0.0
+npm i -D svvsaga/node-modules-public#v1.2.1
 ./node_modules/node-modules-public/setup.sh
 echo "import { lintStagedConfig } from 'node-modules-public'
 
