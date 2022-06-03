@@ -1,2 +1,2 @@
 #!/usr/bin/env -S node
-export {};
+export declare const projectName: string;
