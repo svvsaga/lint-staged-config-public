@@ -6,7 +6,8 @@ import cliSelect from 'cli-select'
 import { writeFileSync, existsSync } from 'fs'
 import { loadConfigJson } from './implementations/loadConfigJson.js'
 import readline from 'readline'
-import { replaceInFile, replaceInFileSync } from 'replace-in-file'
+import pkg from 'replace-in-file'
+const { replaceInFile } = pkg
 
 const client = new ProjectsClient()
 

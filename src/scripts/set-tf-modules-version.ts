@@ -1,6 +1,7 @@
 #!/usr/bin/env -S node
 
-import { replaceInFile } from 'replace-in-file'
+import pkg from 'replace-in-file'
+const { replaceInFile } = pkg
 
 const version = process.argv.slice(2)[0]
 
