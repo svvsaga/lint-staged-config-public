@@ -15,6 +15,7 @@
     "check-for-secrets": "./lib/scripts/check-for-secrets.js",
     "block-large-files": "./lib/scripts/block-large-files.js",
     "set-tf-modules-version": "./lib/scripts/set-tf-modules-version.js",
+    "setup-example-pipeline": "./lib/scripts/setup-example-pipeline.js",
     "generate-gcp-project-config": "./lib/scripts/generate-gcp-project-config.js"
   },
   "repository": {
