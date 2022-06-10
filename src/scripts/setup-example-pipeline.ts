@@ -6,7 +6,7 @@ import cliSelect from 'cli-select'
 import { writeFileSync, existsSync, renameSync } from 'fs'
 import { loadConfigJson } from './implementations/loadConfigJson.js'
 import readline from 'readline'
-import pkg, { replaceInFileSync } from 'replace-in-file'
+import pkg from 'replace-in-file'
 const { replaceInFile } = pkg
 
 const client = new ProjectsClient()
@@ -102,19 +102,19 @@ renameSync(
   `.github/workflows/${project}.deploy-tf.yml`
 )
 
-replaceInFileSync({
+await replaceInFile({
   files: './.github/workflows/*.yml',
   from: /My Project/g,
   to: project,
 })
 
-replaceInFileSync({
+await replaceInFile({
   files: ['./.github/workflows/*.yml', './**/*.tf', './**/*.kts'],
   from: /my-project/g,
   to: project,
 })
 
-replaceInFileSync({
+await replaceInFile({
   files: ['./**/*.tf', './**/*.kts', './**/*.kt'],
   from: /myproject/g,
   to: project.replace(/-/g, ''),
