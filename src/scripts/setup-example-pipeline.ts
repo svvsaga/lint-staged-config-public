@@ -47,21 +47,32 @@ const project = (
   })
 ).value
 
+function readInput(prompt: string): Promise<string> {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  })
+  return new Promise((resolve) => {
+    rl.question(prompt, (answer) => {
+      rl.close()
+      resolve(answer)
+    })
+  })
+}
+
+const displayName =
+  (await readInput(
+    'Enter the display name of your project, or leave it blank to use the project name: '
+  )) || project
+
 const sharedConfig = await loadConfigJson(`${team}-shared`)
 const projectConfig = await loadConfigJson(project)
 
 renameSync('my-project', project)
 
 if (!existsSync(project)) {
-  const input = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  })
-  const path = await new Promise((resolve) =>
-    input.question(
-      `No folder found for ${project}, please enter the path to the folder: `,
-      resolve
-    )
+  const path = await readInput(
+    `No folder found for ${project}, please enter the path to the folder: `
   )
   writeFileSync(`${path}/projects.config.json`, projectConfig)
 } else {
@@ -105,7 +116,7 @@ renameSync(
 await replaceInFile({
   files: './.github/workflows/*.yml',
   from: /My Project/g,
-  to: project,
+  to: displayName,
 })
 
 await replaceInFile({
