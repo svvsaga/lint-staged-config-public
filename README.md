@@ -9,7 +9,7 @@ First, Make sure Node 16+ is installed.
 From the repo where you want to add husky and lint-staged:
 
 ```bash
-npm i -D svvsaga/node-modules-public#v1.2.2
+npm i -D svvsaga/node-modules-public
 ./node_modules/node-modules-public/setup.sh
 echo "import { lintStagedConfig } from 'node-modules-public'
 
@@ -20,7 +20,7 @@ export default lintStagedConfig()" > lint-staged.config.mjs
 
 There is an issue where NPM will not use latest version even if `package.json` is updated. To workaround this, uninstall and reinstall:
 
-    npm uninstall node-modules-public && npm i -D svvsaga/node-modules-public#<new-version>
+    npm uninstall node-modules-public && npm i -D svvsaga/node-modules-public
 
 ### Parameters
 
