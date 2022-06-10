@@ -1,6 +1,6 @@
 {
   "name": "node-modules-public",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Public repo for lint-staged checks and scripts",
   "main": "./lib/index.js",
   "type": "module",
