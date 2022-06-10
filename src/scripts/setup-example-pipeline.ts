@@ -3,10 +3,10 @@
 import { ProjectsClient } from '@google-cloud/resource-manager'
 
 import cliSelect from 'cli-select'
-import { writeFileSync, existsSync } from 'fs'
+import { writeFileSync, existsSync, renameSync } from 'fs'
 import { loadConfigJson } from './implementations/loadConfigJson.js'
 import readline from 'readline'
-import pkg from 'replace-in-file'
+import pkg, { replaceInFileSync } from 'replace-in-file'
 const { replaceInFile } = pkg
 
 const client = new ProjectsClient()
@@ -37,7 +37,7 @@ const teamProjects = await client
 
 const projects = [
   ...new Set(teamProjects.map((project) => project.labels?.svv_team_project!!)),
-]
+].filter((project) => !project.endsWith('-shared'))
 
 console.log('Select which project to use:')
 
@@ -49,6 +49,8 @@ const project = (
 
 const sharedConfig = await loadConfigJson(`${team}-shared`)
 const projectConfig = await loadConfigJson(project)
+
+renameSync('my-project', project)
 
 if (!existsSync(project)) {
   const input = readline.createInterface({
@@ -75,7 +77,6 @@ const replaceTeamUppercaseResults = await replaceInFile({
   from: /<INSERT_TEAM_UPPERCASE>/g,
   to: team.toUpperCase(),
 })
-
 console.log('Team replacement uppercase results:', replaceTeamUppercaseResults)
 
 const replaceTeamLowercaseResults = await replaceInFile({
@@ -83,7 +84,6 @@ const replaceTeamLowercaseResults = await replaceInFile({
   from: /<INSERT_TEAM_LOWERCASE>/g,
   to: team.toLowerCase(),
 })
-
 console.log('Team replacement lowercase results:', replaceTeamLowercaseResults)
 
 const replaceProjectResults = await replaceInFile({
@@ -91,7 +91,33 @@ const replaceProjectResults = await replaceInFile({
   from: /<INSERT_PROJECT>/g,
   to: project.toUpperCase(),
 })
-
 console.log('Project replacement results:', replaceProjectResults)
+
+renameSync(
+  '.github/workflows/my-project.create-tf-release.yml',
+  `.github/workflows/${project}.create-tf-release.yml`
+)
+renameSync(
+  '.github/workflows/my-project.deploy-tf.yml',
+  `.github/workflows/${project}.deploy-tf.yml`
+)
+
+replaceInFileSync({
+  files: './.github/workflows/*.yml',
+  from: /My Project/g,
+  to: project,
+})
+
+replaceInFileSync({
+  files: ['./.github/workflows/*.yml', './**/*.tf', './**/*.kts'],
+  from: /my-project/g,
+  to: project,
+})
+
+replaceInFileSync({
+  files: ['./**/*.tf', './**/*.kts', './**/*.kt'],
+  from: /myproject/g,
+  to: project.replace(/-/g, ''),
+})
 
 process.exit(0)

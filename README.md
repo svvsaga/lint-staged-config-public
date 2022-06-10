@@ -16,6 +16,12 @@ echo "import { lintStagedConfig } from 'node-modules-public'
 export default lintStagedConfig()" > lint-staged.config.mjs
 ```
 
+### Updating version & troubleshooting
+
+There is an issue where NPM will not use latest version even if `package.json` is updated. To workaround this, uninstall and reinstall:
+
+    npm uninstall node-modules-public && npm i -D svvsaga/node-modules-public#<new-version>
+
 ### Parameters
 
 You can add more tasks with the `extras`-parameter:
