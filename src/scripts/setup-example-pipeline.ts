@@ -1,87 +1,28 @@
 #!/usr/bin/env -S node
 
-import { ProjectsClient } from '@google-cloud/resource-manager'
-
-import cliSelect from 'cli-select'
-import { writeFileSync, existsSync, renameSync } from 'fs'
-import { loadConfigJson } from './implementations/loadConfigJson.js'
-import readline from 'readline'
+import { renameSync } from 'fs'
 import pkg from 'replace-in-file'
+import { readInput } from './implementations/readInput'
+import {
+  readProjectConfigs,
+  writeProjectConfig,
+  writeSharedConfig,
+} from './implementations/readProjectConfigs'
 const { replaceInFile } = pkg
 
-const client = new ProjectsClient()
+const { project, projectConfig, sharedConfig, team } =
+  await readProjectConfigs()
 
-const projectsWithTeams = await client
-  .searchProjects({
-    query: `labels.svv_team:*`,
-  })
-  .then((r) => r[0])
+renameSync('my-project', project)
 
-const teams = [
-  ...new Set(projectsWithTeams.map((project) => project.labels?.svv_team!!)),
-]
+await writeProjectConfig({ project, projectConfig })
 
-console.log('Select your team:')
-
-const team = (
-  await cliSelect({
-    values: teams,
-  })
-).value
-
-const teamProjects = await client
-  .searchProjects({
-    query: `labels.svv_team=${team} labels.svv_team_project:*`,
-  })
-  .then((r) => r[0])
-
-const projects = [
-  ...new Set(teamProjects.map((project) => project.labels?.svv_team_project!!)),
-].filter((project) => !project.endsWith('-shared'))
-
-console.log('Select which project to use:')
-
-const project = (
-  await cliSelect({
-    values: projects,
-  })
-).value
-
-function readInput(prompt: string): Promise<string> {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  })
-  return new Promise((resolve) => {
-    rl.question(prompt, (answer) => {
-      rl.close()
-      resolve(answer)
-    })
-  })
-}
+writeSharedConfig(sharedConfig)
 
 const displayName =
   (await readInput(
     'Enter the display name of your project, or leave it blank to use the project name: '
   )) || project
-
-const sharedConfig = await loadConfigJson(`${team}-shared`)
-const projectConfig = await loadConfigJson(project)
-
-renameSync('my-project', project)
-
-if (!existsSync(project)) {
-  const path = await readInput(
-    `No folder found for ${project}, please enter the path to the folder: `
-  )
-  writeFileSync(`${path}/projects.config.json`, projectConfig)
-} else {
-  writeFileSync(`${project}/projects.config.json`, projectConfig)
-}
-console.log('Project config saved!')
-
-writeFileSync('projects.config.json', sharedConfig)
-console.log('Shared project config saved!')
 
 const replaceTeamUppercaseResults = await replaceInFile({
   files: './.github/workflows/*.yml',
