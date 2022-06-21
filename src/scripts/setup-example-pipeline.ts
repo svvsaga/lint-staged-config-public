@@ -2,12 +2,12 @@
 
 import { renameSync } from 'fs'
 import pkg from 'replace-in-file'
-import { readInput } from './implementations/readInput'
+import { readInput } from './implementations/readInput.js'
 import {
   readProjectConfigs,
   writeProjectConfig,
   writeSharedConfig,
-} from './implementations/readProjectConfigs'
+} from './implementations/readProjectConfigs.js'
 const { replaceInFile } = pkg
 
 const { project, projectConfig, sharedConfig, team } =

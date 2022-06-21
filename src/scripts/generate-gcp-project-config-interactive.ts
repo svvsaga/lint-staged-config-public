@@ -4,7 +4,7 @@ import {
   readProjectConfigs,
   writeProjectConfig,
   writeSharedConfig,
-} from './implementations/readProjectConfigs'
+} from './implementations/readProjectConfigs.js'
 
 const { project, projectConfig, sharedConfig } = await readProjectConfigs()
 
