@@ -11,9 +11,6 @@ From the repo where you want to add husky and lint-staged:
 ```bash
 npm i -D svvsaga/node-modules-public
 ./node_modules/node-modules-public/setup.sh
-echo "import { lintStagedConfig } from 'node-modules-public'
-
-export default lintStagedConfig()" > lint-staged.config.mjs
 ```
 
 ### Updating version & troubleshooting
