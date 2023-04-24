@@ -72,12 +72,12 @@ export const lintStagedConfig = ({
     : {}),
   ...(black
     ? {
-        "**/*.py": () => ["black"],
+        "**/*.py": "black",
       }
     : {}),
   ...(flake8
     ? {
-        "**/*.py": () => ["flake8"],
+        "**/*.py": "flake8",
       }
     : {}),
   ...extras,
