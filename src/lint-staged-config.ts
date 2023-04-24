@@ -10,8 +10,7 @@ export type LintStagedOptions = {
   ignoreLargeFilesRegex?: RegExp | RegExp[];
   terraformFmt?: boolean;
   terragruntHclFmt?: boolean;
-  black?: boolean;
-  flake8?: boolean;
+  python?: boolean;
   ktlint?: boolean;
   extras?: LintStagedConfig;
 };
@@ -38,8 +37,7 @@ export const lintStagedConfig = ({
   ktlint = false,
   terraformFmt = false,
   terragruntHclFmt = false,
-  black = false,
-  flake8 = false,
+  python = false,
 }: LintStagedOptions = {}): LintStagedConfig => ({
   "**": (filenames) => [
     "check-for-secrets " +
@@ -70,14 +68,9 @@ export const lintStagedConfig = ({
         "**/*.hcl": () => ["terragrunt hclfmt"],
       }
     : {}),
-  ...(black
+  ...(python
     ? {
-        "**/*.py": "black",
-      }
-    : {}),
-  ...(flake8
-    ? {
-        "**/*.py": "flake8",
+        "**/*.py": ["black", "flake8"],
       }
     : {}),
   ...extras,
