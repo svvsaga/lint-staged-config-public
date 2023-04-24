@@ -24,36 +24,36 @@ There is an issue where NPM will not use latest version even if `package.json` i
 You can add more tasks with the `extras`-parameter:
 
 ```javascript
-import { lintStagedConfig } from 'node-modules-public'
+import { lintStagedConfig } from "node-modules-public";
 
 export default lintStagedConfig({
   extras: {
-    '**/*.ts': () => ['npm run build', 'git add .'],
+    "**/*.ts": () => ["npm run build", "git add ."],
   },
-})
+});
 ```
 
 Some common tasks are included:
 
 ```javascript
-import { lintStagedConfig } from 'node-modules-public'
+import { lintStagedConfig } from "node-modules-public";
 
 export default lintStagedConfig({
   ktlint: true, // will run "ktlint" for all kotlin files
   terraformFmt: true, // will run "terraform fmt" for all terraform files
   terragruntHclFmt: true, // will run "terragrunt hclfmt" for all hcl files
-})
+});
 ```
 
 You can ignore specific secret or large files with `ignoreSecretsInFilesRegex` and `ignoreLargeFilesRegex`. `package-lock.json` is automatically ignored.
 
 ```javascript
-import { lintStagedConfig } from 'node-modules-public'
+import { lintStagedConfig } from "node-modules-public";
 
 export default lintStagedConfig({
   ignoreSecretsInFilesRegex: /my-secret\.json$/,
   ignoreLargeFilesRegex: /\.png$/,
-})
+});
 ```
 
 ## Other utils
@@ -64,3 +64,7 @@ export default lintStagedConfig({
 ## Development
 
 Run `./setup-dev.sh` to install this package globally, so `check-for-secrets` etc. are available in the Node `bin/`-folder.
+
+### Bump
+
+Modify the code. Run `tsc`. Commit everything. Run `npm version <version>`. Push.
