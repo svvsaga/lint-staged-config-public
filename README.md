@@ -65,6 +65,6 @@ export default lintStagedConfig({
 
 Run `./setup-dev.sh` to install this package globally, so `check-for-secrets` etc. are available in the Node `bin/`-folder.
 
-### Bump
+### Publish a new version
 
-Modify the code. Run `tsc`. Commit everything. Run `npm version <version>`. Push.
+Modify the code. Run `npm build`, and then set a new version with `npm version <version>`. Commit everything, including the lib folder. Push.
