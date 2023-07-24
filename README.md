@@ -19,6 +19,10 @@ There is an issue where NPM will not use latest version even if `package.json` i
 
     npm uninstall node-modules-public && npm i -D svvsaga/node-modules-public
 
+### Testing lint-staged
+
+To test the lint-staged config, make changes to `lint-staged.config.mjs` or to `lint-staged-config.ts`, and then runt lint-staged with `npx lint-staged`.
+
 ### Parameters
 
 You can add more tasks with the `extras`-parameter:
